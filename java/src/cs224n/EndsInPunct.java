@@ -29,14 +29,16 @@ public class EndsInPunct implements RuleFeaturizer<IString, String> {
   public List<FeatureValue<String>> ruleFeaturize(
       Featurizable<IString, String> f) {
     List<FeatureValue<String>> features = Generics.newLinkedList();
-    lastWord = f.targetPhrase.get(f.targetPhrase.size() - 1).toString();
-
-    if (lastWord.equals(".") || lastWord.equals(",")) {
-      features.add(new FeatureValue<String>("EndsInPunct", 1.0));
-    } else {
-      features.add(new FeatureValue<String>("DoesNotEndInPunct", 1.0));
+    if (f.targetPhrase != null && f.targetPhrase.size() > 0) {
+      lastWord = f.targetPhrase.get(f.targetPhrase.size() - 1).toString();
+      if (lastWord.equals(".") || lastWord.equals(",")) {
+        features.add(new FeatureValue<String>("EndsInPunct", 1.0));
+      } else {
+        features.add(new FeatureValue<String>("DoesNotEndInPunct", 1.0));
+      }
     }
 
+    
     return features;
   }
 

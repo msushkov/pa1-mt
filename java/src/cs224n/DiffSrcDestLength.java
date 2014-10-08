@@ -29,7 +29,7 @@ public class DiffSrcDestLength implements RuleFeaturizer<IString, String> {
     // with your own feature.
     List<FeatureValue<String>> features = Generics.newLinkedList();
 
-    features.add(new FeatureValue<String>(String.format("%s:%d", FEATURE_NAME, Math.abs(f.targetPhrase.size() - f.sourcePhrase.size()), 1.0));
+    features.add(new FeatureValue<String>(String.format("%s:%d", FEATURE_NAME, Math.abs(f.targetPhrase.size() - f.sourcePhrase.size()), 1.0)));
     
     return features;
   }

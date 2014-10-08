@@ -1,0 +1,13 @@
+#!/bin/bash
+
+FEATURE=$1
+FEATURE_FILE="$FEATURE.ini"
+
+if [ "$FEATURE" = "baseline" ]; then
+    FEATURE_FILE="cs224n.ini"
+fi
+
+for i in `seq 1 10`;
+do
+    phrasal.sh cs224n.vars 2,4-5 $FEATURE_FILE $FEATURE
+done  

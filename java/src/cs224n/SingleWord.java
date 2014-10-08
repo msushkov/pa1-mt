@@ -16,9 +16,8 @@ import edu.stanford.nlp.mt.util.Sequence;
 /**
  * A rule featurizer.
  */
-public class EndsInPunct implements RuleFeaturizer<IString, String> {
-
-  String lastWord;
+public class SingleWord implements RuleFeaturizer<IString, String> {
+ 
 
   @Override
   public void initialize() {
@@ -29,14 +28,21 @@ public class EndsInPunct implements RuleFeaturizer<IString, String> {
   public List<FeatureValue<String>> ruleFeaturize(
       Featurizable<IString, String> f) {
     List<FeatureValue<String>> features = Generics.newLinkedList();
-    lastWord = f.targetPhrase.get(f.targetPhrase.size() - 1).toString();
-
-    if (lastWord.equals(".") || lastWord.equals(",")) {
-      features.add(new FeatureValue<String>("EndsInPunct", 1.0));
+    /*if (f.sourcePhrase.size() == 1) {
+      if (f.targetPhrase.size() == 1) {
+        features.add(new FeatureValue<String>("SingleSource:SingleTarget", 1.0));
+      } else {
+        features.add(new FeatureValue<String>("SingleSource:MultiTarget", 1.0));
+      }
     } else {
-      features.add(new FeatureValue<String>("DoesNotEndInPunct", 1.0));
-    }
-
+      if (f.targetPhrase.size() == 1) {
+        features.add(new FeatureValue<String>("MultiSource:SingleTarget", 1.0));
+      } else {
+        features.add(new FeatureValue<String>("MultiSource:MultiTarget", 1.0));
+      }
+    }*/
+    //features.add(new FeatureValue<String>("SourceLength:"+f.sourcePhrase.size()+"TargetLength:"+f.targetPhrase.size(), 1.0));
+    features.add(new FeatureValue<String>("SourceLength:"+f.sourcePhrase.size(), 1.0));
     return features;
   }
 

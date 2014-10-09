@@ -29,12 +29,26 @@ public class EndsInPrep implements RuleFeaturizer<IString, String> {
   public List<FeatureValue<String>> ruleFeaturize(
       Featurizable<IString, String> f) {
     List<FeatureValue<String>> features = Generics.newLinkedList();
-    Sequence<IString> target = f.targetPhrase;
-    String lastWord = target.get(target.size() - 1).toString();
-    if (preps.contains(lastWord)) {
-      features.add(new FeatureValue<String>("EndsInPrep", 1.0));
-    } else {
-      features.add(new FeatureValue<String>("EndsInPrep", 0));
+    if (f.targetPhrase != null && f.targetPhrase.size() > 0) {
+	    for (int i = 0; i < f.targetPhrase.size(); i++) {
+		    String word = f.targetPhrase.get(i).toString();
+		    if (preps.contains(word)) {
+			    features.add(new FeatureValue<String>("PrepAt:"+i, 1.0));
+		    } else if (word.equals(".") || word.equals(",")) {
+			    features.add(new FeatureValue<String>("PunctAt:"+i, 1.0));
+		    }
+	    }
+	    String lastWord = f.targetPhrase.get(f.targetPhrase.size() - 1).toString();
+	    if (preps.contains(lastWord)) {
+		    features.add(new FeatureValue<String>("EndsWithPrep", 1.0));
+	    } else {
+		    features.add(new FeatureValue<String>("DoesNotEndWithPrep:", 1.0));
+	    }
+	    if (lastWord.equals(".") || lastWord.equals(",")) {
+		    features.add(new FeatureValue<String>("EndsWithPunct", 1.0));
+	    } else {
+		    features.add(new FeatureValue<String>("DoesNotEndWithPunct:", 1.0));
+	    }
     }
 
     return features;

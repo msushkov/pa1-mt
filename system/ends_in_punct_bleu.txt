@@ -1,0 +1,10 @@
+15.575 newstest2011.ends_in_punct
+15.448 newstest2011.ends_in_punct
+15.271 newstest2011.ends_in_punct
+15.245 newstest2011.ends_in_punct
+15.208 newstest2011.ends_in_punct
+15.182 newstest2011.ends_in_punct
+15.160 newstest2011.ends_in_punct
+15.140 newstest2011.ends_in_punct
+15.135 newstest2011.ends_in_punct
+15.101 newstest2011.ends_in_punct
